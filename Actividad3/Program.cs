@@ -1,44 +1,89 @@
 ﻿using System;
-using System.Collections.Generic
+using System.Collections.Generic;
 
 namespace Actividad3
 {
-	enum AreasPercentage : byte { Mercadotecnia = 20, QnA = 20, Production = 40, Sales = 20 };
-	enum MarketingProjectsPercentage : byte { Proyecto1_M = 40, Proyecto2_M = 30, Proyecto3_M = 30 };
-	enum QnAProjectsPercentage : byte { Proyecto1_C = 40, Proyecto2_C = 60 };
-	enum ProductionProjectsPercentage : byte { Proyecto1_P = 15, Proyecto2_P = 30, Proyecto3_P = 30, Proyecto4_P = 25 };
-	enum SalesProjectsPercentage : byte { Proyecto3_V = 100 };
 
 	class MainClass
 	{
+		const byte MARKETING_BUDGET_PORCENTAGE = 20;
+		const byte QNA_BUDGET_PORCENTAGE = 20;
+		const byte PRODUCTION_BUDGET_PORCENTAGE = 40;
+		const byte SALES_BUDGET_PORCENTAGE = 20;
+
 		public static void Main(string[] args)
 		{
 			string userEntry;
 			decimal budget;
 
-			string marketingBudgetOutput;
-			string qnaBudgetOutput;
-			string productionBudgetOutput;
-			string salesBudgetOutput;
-
-			for()
-
+			Console.WriteLine("Entre el presupuesto inicial total: ");
 
 			userEntry = Console.ReadLine();
 			budget = Math.Round(Convert.ToDecimal(userEntry), 2);
 
-			string output = @"
-Presupuesto Inicial: {0}
+			double marketingBudget = MARKETING_BUDGET_PORCENTAGE * (double)budget / 100;
+			double qnaBudget = QNA_BUDGET_PORCENTAGE * (double)budget / 100;
+			double productionBudget = PRODUCTION_BUDGET_PORCENTAGE * (double)budget / 100;
+			double salesBudget = SALES_BUDGET_PORCENTAGE * (double)budget / 100;
 
-  Presupuesto {} (20%): {1}
-  Presupuesto {} (20%): {1}
-  Presupuesto {} (40%): {1}
-  Presupuesto Mercadotecnia (20%): {1}
+			string marketingBudgetOutput = String.Format(
+				@"
+			Proyecto1_M (40%): ${0}
+			Proyecto2_M (30%): ${1}
+			Proyecto3_M (30%): ${2}
+				",
+			0.40 * marketingBudget,
+			0.30 * marketingBudget,
+			0.30 * marketingBudget);
 
-			";
+			string qnaBudgetOutput = String.Format(
+				@"
+			Proyecto1_C (40%): ${0}
+			Proyecto2_C (60%): ${1}
+				",
+			0.40 * qnaBudget,
+			0.60 * qnaBudget);
 
-			string finalOutput = string.Format(output, asd); 
-			Console.WriteLine(budget);
+			string productionBudgetOutput = String.Format(
+				@"
+			Proyecto1_P (15%): ${0}
+			Proyecto2_P (30%): ${1}
+			Proyecto3_P (30%): ${2}
+			Proyecto4_P (25%): ${3}
+				",
+			0.15 * productionBudget,
+			0.30 * productionBudget,
+			0.30 * productionBudget,
+			0.25 * productionBudget
+		);
+
+			string salesBudgetOutput = String.Format(
+				@"
+			Proyecto1_V (100%): ${0}
+				",
+			salesBudget
+		);
+
+			string finalOutput = String.Format(
+				@"
+Presupuesto Total: ${0}
+	
+	Presupuesto  Mercadotecnia (20%): ${1}
+	{2}
+	Presupuesto  Calidad (20%): ${3}
+	{4}
+	Presupuesto  Producción (40%): ${5}
+	{6}
+	Presupuesto  Ventas (20%): ${7}
+	{8}
+				",
+			budget,
+			marketingBudget, marketingBudgetOutput,
+			qnaBudget, qnaBudgetOutput,
+			productionBudget, productionBudgetOutput,
+			salesBudget, salesBudgetOutput
+		);
+			Console.WriteLine(finalOutput);
 		}
 	}
 }
